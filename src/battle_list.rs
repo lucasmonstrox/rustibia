@@ -1,17 +1,19 @@
-use ndarray::Array2;
+use ndarray::Array3;
 
+pub struct BattleList {
+    pub content: Array3<u8>
+}
 
-#[inline(always)]
-pub fn get_creatures_count(battle_list_content: &Array2<u8>) -> u8 {
-    let mut count = 0;
-    let shape: &[usize] = battle_list_content.shape();
-    let possible_count = shape[0] / 22;
-    for i in 0..possible_count {
-        let y = (i * 22) + 15;
-        if battle_list_content[[y, 22]] != 0 {
-            break;
+impl BattleList {
+    pub fn get_creatures_count(&self) -> u8 {
+        let mut creatures_count = 0;
+        for i in 0..(self.content.shape()[0] / 22) {
+            let y: usize = (i * 22) + 15;
+            if self.content[[y, 22, 0]] != 0 {
+                break;
+            }
+            creatures_count += 1;
         }
-        count += 1;
+        creatures_count
     }
-    count
 }
