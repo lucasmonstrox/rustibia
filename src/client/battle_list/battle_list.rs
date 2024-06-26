@@ -36,13 +36,16 @@ impl BattleList<'_> {
     pub fn has_creature_in_target(&self) -> bool {
         for i in 0..self.get_max_creatures_count() {
             let lifebar_start_y = (i * CREATURE_SLOT_HEIGHT) as usize;
-            let has_creature_in_target = unsafe {
+            let has_creature_in_target = {
                 // Obtain the RGB values of the first pixel of the slot to determine if it matches
                 // the target color or the target hover color
-                let red = *self.content.get_ptr([lifebar_start_y, 0, 0]).unwrap();
-                let green = *self.content.get_ptr([lifebar_start_y, 0, 1]).unwrap();
-                let blue = *self.content.get_ptr([lifebar_start_y, 0, 2]).unwrap();
-                let pixel_color = (red, green, blue);
+                let pixel_color = unsafe {
+                    (
+                        *self.content.get_ptr([lifebar_start_y, 0, 0]).unwrap(),
+                        *self.content.get_ptr([lifebar_start_y, 0, 1]).unwrap(),
+                        *self.content.get_ptr([lifebar_start_y, 0, 2]).unwrap(),
+                    )
+                };
                 // Check if the pixel color matches TARGET_COLOR (creature is targeted)
                 // or TARGET_HOVER_COLOR (creature is targeted with highlight due to mouse hover)
                 pixel_color == TARGET_COLOR || pixel_color == TARGET_HOVER_COLOR
