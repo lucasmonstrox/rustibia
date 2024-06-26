@@ -15,3 +15,7 @@ criterion = "0.5.1"
 [[bench]]
 name = "battle_list"
 harness = false
+
+[[bench]]
+name = "status_bar"
+harness = false
