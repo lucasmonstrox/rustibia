@@ -11,13 +11,13 @@ impl BattleList<'_> {
         for creature_index in 0..self.get_max_creatures_count() {
             // The starting Y-coordinate (first vertical pixel) of the lifebar for the current creature slot
             let lifebar_start_y =
-                ((creature_index * CREATURE_SLOT_HEIGHT) + LIFEBAR_START_Y) as usize;
+                ((creature_index * CREATURE_SLOT_HEIGHT) + LIFEBAR_START_POSITION.1) as usize;
             // Check if the first pixel of the lifebar is different from black (0, 0, 0), indicating the absence of a lifebar
             // Since the background is gray, it is safe to check only the first value of the pixel
             let no_creature_in_slot = unsafe {
                 *self
                     .content
-                    .get_ptr([lifebar_start_y, LIFEBAR_START_X as usize, 0])
+                    .get_ptr([lifebar_start_y, LIFEBAR_START_POSITION.0 as usize, 0])
                     .unwrap()
                     != BLACK_PIXEL_COLOR.0
             };
