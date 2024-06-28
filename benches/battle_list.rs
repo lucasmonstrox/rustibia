@@ -29,6 +29,15 @@ fn benchmark_get_max_creatures_count(c: &mut Criterion) {
     });
 }
 
+fn benchmark_has_creature_in_target_empty(c: &mut Criterion) {
+    let content = load_image("./assets/examples/client/battle_list/empty_battle_list.png").unwrap();
+    let battle_list = BattleList { content };
+
+    c.bench_function("has_creature_in_target_first", |b| {
+        b.iter(|| battle_list.has_creature_in_target())
+    });
+}
+
 fn benchmark_has_creature_in_target_first(c: &mut Criterion) {
     let content = load_image("./assets/examples/client/battle_list/target_first.png").unwrap();
     let battle_list = BattleList { content };
@@ -52,6 +61,7 @@ criterion_group!(
     benchmark_get_creatures_count_empty,
     benchmark_get_creatures_count_full,
     benchmark_get_max_creatures_count,
+    benchmark_has_creature_in_target_empty,
     benchmark_has_creature_in_target_first,
     benchmark_has_creature_in_target_last
 );
