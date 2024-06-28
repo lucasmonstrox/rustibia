@@ -1,4 +1,4 @@
-use super::constants::*;
+use super::constants::{HP_PERCENTAGE_MAPPER, MANA_PERCENTAGE_MAPPER};
 use ndarray::ArrayView3;
 
 pub struct StatusBar<'a> {
@@ -6,26 +6,35 @@ pub struct StatusBar<'a> {
 }
 
 impl StatusBar<'_> {
-    pub fn get_hp_percentage(&self) -> u32 {
-        for &([x, y], expected_color, hp) in &HP_PERCENTAGE_MAPPER {
+    fn get_percentage(&self, mapper: &[([usize; 2], (u8, u8, u8), u32)]) -> u32 {
+        for &([x, y], expected_color, percentage) in mapper {
             // Get the RGB values of the current pixel from the content
-            // The values are retrieved using the x, y coordinates provided by the HP_PERCENTAGE_MAPPER
-            let lifebar_pixel_color = unsafe {
+            // The values are retrieved using the x, y coordinates provided by the mapper
+            let pixel_color = unsafe {
                 (
                     *self.content.get_ptr([x, y, 0]).unwrap(),
                     *self.content.get_ptr([x, y, 1]).unwrap(),
                     *self.content.get_ptr([x, y, 2]).unwrap(),
                 )
             };
-            // Compare the extracted pixel color with the expected lifebar color from HP_PERCENTAGE_MAPPER
-            // If they match, it means the health percentage (HP) associated with this color is present
+            // Compare the extracted pixel color with the expected bar color from mapper
+            // If they match, it means the value percentage associated with this color is present
             // and the expected percentage will be returned
-            if lifebar_pixel_color == expected_color {
-                return hp;
+            if pixel_color == expected_color {
+                return percentage;
             }
         }
         // If no matching color is found, return 0.
-        // This is unlikely to happen because it would mean the character is dead, making this value not very useful.
+        // For HP, this likely means the character is dead.
+        // For mana, it means the character cannot cast spells or heal.
         0
+    }
+
+    pub fn get_hp_percentage(&self) -> u32 {
+        self.get_percentage(&HP_PERCENTAGE_MAPPER)
+    }
+
+    pub fn get_mana_percentage(&self) -> u32 {
+        self.get_percentage(&MANA_PERCENTAGE_MAPPER)
     }
 }
