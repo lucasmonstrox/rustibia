@@ -1,18 +1,16 @@
-use ndarray::ArrayView3;
 use rustibia::client::battle_list::BattleList;
+use rustibia::utils::image::load_image;
 
 #[test]
-fn return_1_when_battle_list_has_only_one_creature() {
-    let content_vec = image::open("attacking.png").unwrap().as_bytes().to_vec();
-    let content = ArrayView3::from_shape((979, 156, 4), &content_vec).unwrap();
+fn return_0_when_battle_list_is_empty() {
+    let content = load_image("./assets/examples/client/battle_list/empty_battle_list.png").unwrap();
     let battle_list = BattleList { content };
-    assert_eq!(battle_list.get_creatures_count(), 1);
+    assert_eq!(battle_list.get_creatures_count(), 0);
 }
 
 #[test]
 fn return_45_when_battle_list_is_full_of_creatures() {
-    let content_vec = image::open("content.png").unwrap().as_bytes().to_vec();
-    let content = ArrayView3::from_shape((998, 156, 4), &content_vec).unwrap();
+    let content = load_image("./assets/examples/client/battle_list/full_battle_list.png").unwrap();
     let battle_list = BattleList { content };
     assert_eq!(battle_list.get_creatures_count(), 45);
 }
