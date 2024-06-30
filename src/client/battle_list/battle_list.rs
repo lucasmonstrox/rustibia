@@ -2,7 +2,7 @@ use super::constants::*;
 use ndarray::ArrayView3;
 
 pub struct BattleList<'a> {
-    content: ArrayView3<'a, u8>,
+    pub content: ArrayView3<'a, u8>,
 }
 
 impl BattleList<'_> {
