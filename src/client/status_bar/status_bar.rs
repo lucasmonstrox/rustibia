@@ -6,6 +6,8 @@ pub struct StatusBar<'a> {
 }
 
 impl StatusBar<'_> {
+    // TODO: Enhance the function to return additional percentages at 5, 15, 25, 35, 45,
+    // 55, 65, 75, 85, and 95 percent intervals for more detailed analysis.
     fn get_percentage(&self, mapper: &[([usize; 2], (u8, u8, u8), u32)]) -> u32 {
         for &([x, y], expected_color, percentage) in mapper {
             // Get the RGB values of the current pixel from the content
