@@ -1,4 +1,4 @@
-use rustibia::client::actions_bar::Action;
+use rustibia::client::action_bars::Action;
 use rustibia::utils::image::load_image;
 
 #[test]
