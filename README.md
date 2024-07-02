@@ -20,7 +20,7 @@ cargo test
 
 This will execute all the unit tests and integration tests defined in the project.
 
-## Tests
+## Benchmarks
 
 To run the benchmarks for this application, you can use the following command:
 
