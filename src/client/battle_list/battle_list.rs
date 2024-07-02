@@ -33,6 +33,7 @@ impl BattleList<'_> {
         self.content.shape()[0] as u32 / CREATURE_SLOT_HEIGHT
     }
 
+    // TODO: Add tests, benchmarks, and examples for Creature with target and hover on slot
     pub fn has_creature_in_target(&self) -> bool {
         for i in 0..self.get_max_creatures_count() {
             let lifebar_start_y = (i * CREATURE_SLOT_HEIGHT) as usize;
