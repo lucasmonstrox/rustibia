@@ -5,7 +5,6 @@ use rustibia::utils::image::load_image;
 fn benchmark_get_creatures_count_when_there_are_no_creatures(c: &mut Criterion) {
     let content = load_image("./assets/examples/client/battle_list/no_creatures.png").unwrap();
     let battle_list = BattleList { content };
-
     c.bench_function("get_creatures_count_when_there_are_no_creatures", |b| {
         b.iter(|| battle_list.get_creatures_count())
     });
@@ -14,7 +13,6 @@ fn benchmark_get_creatures_count_when_there_are_no_creatures(c: &mut Criterion) 
 fn benchmark_get_creatures_count_when_its_full_of_creatures(c: &mut Criterion) {
     let content = load_image("./assets/examples/client/battle_list/full_of_creatures.png").unwrap();
     let battle_list = BattleList { content };
-
     c.bench_function("get_creatures_count_when_its_full_of_creatures", |b| {
         b.iter(|| battle_list.get_creatures_count())
     });
@@ -23,7 +21,6 @@ fn benchmark_get_creatures_count_when_its_full_of_creatures(c: &mut Criterion) {
 fn benchmark_get_max_creatures_count(c: &mut Criterion) {
     let content = load_image("./assets/examples/client/battle_list/full_of_creatures.png").unwrap();
     let battle_list = BattleList { content };
-
     c.bench_function("get_max_creatures_count", |b| {
         b.iter(|| battle_list.get_max_creatures_count())
     });
@@ -32,7 +29,6 @@ fn benchmark_get_max_creatures_count(c: &mut Criterion) {
 fn benchmark_has_creature_in_target_when_there_are_no_creatures(c: &mut Criterion) {
     let content = load_image("./assets/examples/client/battle_list/no_creatures.png").unwrap();
     let battle_list = BattleList { content };
-
     c.bench_function("has_creature_in_target_when_there_are_no_creatures", |b| {
         b.iter(|| battle_list.has_creature_in_target())
     });
@@ -41,7 +37,6 @@ fn benchmark_has_creature_in_target_when_there_are_no_creatures(c: &mut Criterio
 fn benchmark_has_creature_in_target_when_has_no_creature_in_target(c: &mut Criterion) {
     let content = load_image("./assets/examples/client/battle_list/full_of_creatures.png").unwrap();
     let battle_list = BattleList { content };
-
     c.bench_function(
         "has_creature_in_target_when_has_no_creature_in_target",
         |b| b.iter(|| battle_list.has_creature_in_target()),
@@ -52,7 +47,6 @@ fn benchmark_has_creature_in_target_when_target_is_in_first_position(c: &mut Cri
     let content =
         load_image("./assets/examples/client/battle_list/target_is_in_first_position.png").unwrap();
     let battle_list = BattleList { content };
-
     c.bench_function(
         "has_creature_in_target_when_target_is_in_first_position",
         |b| b.iter(|| battle_list.has_creature_in_target()),
@@ -63,7 +57,6 @@ fn benchmark_has_creature_in_target_when_target_is_in_last_position(c: &mut Crit
     let content =
         load_image("./assets/examples/client/battle_list/target_is_in_last_position.png").unwrap();
     let battle_list = BattleList { content };
-
     c.bench_function(
         "has_creature_in_target_when_target_is_in_last_position",
         |b| b.iter(|| battle_list.has_creature_in_target()),
