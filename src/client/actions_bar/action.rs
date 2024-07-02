@@ -1,6 +1,10 @@
-pub struct Action;
+use ndarray::ArrayView3;
 
-impl Action {
+pub struct Action<'a> {
+    pub content: ArrayView3<'a, u8>,
+}
+
+impl Action<'_> {
     pub fn get_count(&self) -> Option<u32> {
         Some(100)
     }
@@ -14,13 +18,14 @@ impl Action {
     }
 
     pub fn is_equipped(&self) -> bool {
-        true
+        unsafe {
+            *self.content.get_ptr([0, 0, 0]).unwrap() != 16
+                && *self.content.get_ptr([0, 0, 1]).unwrap() != 17
+                && *self.content.get_ptr([0, 0, 2]).unwrap() != 17
+        }
     }
 
     pub fn is_usable(&self) -> bool {
-        if !self.is_equipped() {
-            return false;
-        }
         true
     }
 }
