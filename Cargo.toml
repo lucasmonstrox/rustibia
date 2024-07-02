@@ -13,6 +13,10 @@ ndarray = "0.15.6"
 criterion = "0.5.1"
 
 [[bench]]
+name = "action_bars"
+harness = false
+
+[[bench]]
 name = "battle_list"
 harness = false
 

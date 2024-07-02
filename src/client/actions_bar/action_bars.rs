@@ -1,7 +1,7 @@
 use super::action::*;
 
-pub struct ActionsBar<'a> {
+pub struct ActionBars<'a> {
     actions: [Action<'a>],
 }
 
-impl ActionsBar<'_> {}
+impl ActionBars<'_> {}
