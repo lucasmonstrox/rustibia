@@ -1,3 +1,4 @@
+use super::constants::EQUIPPED_ACTION_COLOR;
 use ndarray::ArrayView3;
 
 pub struct Action<'a> {
@@ -19,9 +20,9 @@ impl Action<'_> {
 
     pub fn is_equipped(&self) -> bool {
         unsafe {
-            *self.content.get_ptr([0, 0, 0]).unwrap() != 16
-                && *self.content.get_ptr([0, 0, 1]).unwrap() != 17
-                && *self.content.get_ptr([0, 0, 2]).unwrap() != 17
+            *self.content.get_ptr([0, 0, 0]).unwrap() == EQUIPPED_ACTION_COLOR.0
+                && *self.content.get_ptr([0, 0, 1]).unwrap() == EQUIPPED_ACTION_COLOR.1
+                && *self.content.get_ptr([0, 0, 2]).unwrap() == EQUIPPED_ACTION_COLOR.2
         }
     }
 
