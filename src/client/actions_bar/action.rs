@@ -18,6 +18,7 @@ impl Action<'_> {
         Some("strong health potion")
     }
 
+    // TODO: Consider caching this method to avoid unnecessary recomputation on subsequent calls
     pub fn is_equipped(&self) -> bool {
         unsafe {
             *self.content.get_ptr([0, 0, 0]).unwrap() == EQUIPPED_ACTION_COLOR.0
